@@ -6,17 +6,23 @@ const Profile = require('./models/profile');
 // express app
 const app = express();
 
-const dbURI='mongodb+srv://a2c:2351210eee@cluster0.7oguxyz.mongodb.net/node-tut?retryWrites=true&w=majority';
-mongoose.connect(dbURI);
+// const dbURI='mongodb+srv://a2c:2351210eee@cluster0.7oguxyz.mongodb.net/node-tut?retryWrites=true&w=majority';
+// mongoose.connect(dbURI);
 
 // listen for requests
-app.listen(3000);
+const PORT = process.env.PORT || 3001;
 
 //morgan
 app.use(morgan('dev'));
 
 //middleware static files
 app.use(express.static('public'));
+
+
+
+app.get('/api', (req, res) => {
+  res.json({ message: "Hello from server!" });
+});
 
 app.get('/', (req, res) => {
   // res.send('<p>home page</p>');
@@ -53,4 +59,8 @@ app.get('/about-us', (req, res) => {
 // 404 page
 app.use((req, res) => {
   res.status(404).sendFile('./views/404.html', { root: __dirname });
+});
+
+app.listen(PORT, () => {
+  console.log('Server listening on ${PORT}');
 });
