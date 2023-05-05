@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 
 // mongoose & mongo tests
 app.get('/add-blog', (req, res) => {
-  const profile = new Profile({
+  const profile = new Blog({
     title: 'new blog3',
     snippet: 'about my new blog3',
     body: 'more about my new blog3'

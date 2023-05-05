@@ -2,16 +2,20 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const profileSchema = new Schema({
-  title: {
+  name: {
     type: String,
     required: true,
   },
-  snippet: {
+  institute: {
     type: String,
     required: true,
   },
-  body: {
+  type: {
     type: String,
+    enum: [
+      "student",
+      "faculty",
+    ],
     required: true
   },
 }, { timestamps: true });
