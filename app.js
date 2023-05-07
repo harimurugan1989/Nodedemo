@@ -6,8 +6,8 @@ const Profile = require('./models/profile');
 // express app
 const app = express();
 
-// const dbURI='mongodb+srv://a2c:2351210eee@cluster0.7oguxyz.mongodb.net/node-tut?retryWrites=true&w=majority';
-// mongoose.connect(dbURI);
+const dbURI='mongodb+srv://a2c:2351210eee@cluster0.7oguxyz.mongodb.net/node-tut?retryWrites=true&w=majority';
+mongoose.connect(dbURI);
 
 // listen for requests
 const PORT = process.env.PORT || 3001;
@@ -23,6 +23,19 @@ app.use(express.static('public'));
 app.get('/api', (req, res) => {
   res.json({ message: "Hello from server!" });
 });
+
+app.get('/testdata', (req, res) => {
+  try {
+    const profiles = Profile.find({});
+    // const blogs = await Blog.find({})
+    // console.log(profiles);
+    res.json(profiles);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal server2 error');
+  }
+});
+
 
 app.get('/', (req, res) => {
   // res.send('<p>home page</p>');
